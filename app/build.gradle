@@ -27,17 +27,15 @@ android {
         applicationId "cn.lancetmusic"
         minSdk 23
         targetSdk 32
-        versionCode 561
-        versionName "1.0.0"
+        versionCode parent.ext.versionCode
+        versionName parent.ext.versionName
 //        buildConfigField "String", "COMMIT_HASH", "\"${commitHash}\""
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         applicationVariants.all { variant ->
 
-            def apkName = "LancetMusic";
-
-            def branchName = project.hasProperty("branchName") ? project.property("branchName") : System.getenv("CIRCLE_BRANCH")
+            def apkName = parent.ext.applicationName;
 
             def flavour = variant.productFlavors.get(0);
             if (flavour.name == "dev") {
@@ -50,12 +48,11 @@ android {
                 variant.mergedFlavor.proguardFiles.add(new File("proguard-rules-prod-release.pro"))
             }
 
-//            apkName += "_" + versionName + "_" + versionCode + "_" + commitHash + "_" + buildNumber + variant.buildType.name.charAt(0).toUpperCase()
-            apkName += "_" + versionName + "_" + versionCode + "_" + variant.buildType.name.charAt(0).toUpperCase()
+            apkName += "_" + versionName + "_" + versionCode + "_" + commitHash + "_" + buildNumber + variant.buildType.name.charAt(0).toUpperCase()
 
-//            if (parent.ext.branchName) {
+            if (parent.ext.branchName) {
                 apkName += "_" + branchName
-//            }
+            }
 
             apkName += ".apk"
 
@@ -65,7 +62,7 @@ android {
 
             flavour.ext.betaDistributionGroupAliases = "tpp-android-alpha"
             flavour.ext.betaDistributionNotifications = true
-//            flavour.ext.betaDistributionReleaseNotes = "Branch: ${parent.ext.branchName}"
+            flavour.ext.betaDistributionReleaseNotes = "Branch: ${parent.ext.branchName}"
         }
 
 
@@ -77,16 +74,20 @@ android {
         prod {
             dimension "mode"
             applicationId "cn.lancet.lancetmusic"
-            resValue "string","app_name","LancetMusicPro"
-            buildConfigField "int","TYPE","1"
-            manifestPlaceholders = [app_icon:"@drawable/ic_logo_pro"]
+            resValue "string", "app_name", "LancetMusicPro"
+            buildConfigField "int", "TYPE", "1"
+//            buildConfigField "boolean", "ENABLE_SETTINGS", "false"
+
+            manifestPlaceholders = [app_icon: "@drawable/ic_logo_pro"]
         }
         dev {
             dimension "mode"
             applicationId "cn.lancet.lancetmusic.dev"
-            resValue "string","app_name","LancetMusicDev"
-            buildConfigField "int","TYPE","2"
-            manifestPlaceholders = [app_icon:"@drawable/ic_logo_dev"]
+            resValue "string", "app_name", "LancetMusicDev"
+            buildConfigField "int", "TYPE", "2"
+//            buildConfigField "boolean", "ENABLE_SETTINGS", "true"
+
+            manifestPlaceholders = [app_icon: "@drawable/ic_logo_dev"]
         }
     }
 

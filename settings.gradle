@@ -11,45 +11,7 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
     }
-
-    versionCatalogs{
-        libs {
-
-        }
-    }
-//
-//    if (project.hasProperty('preDexEnable')) {
-//        project.ext.preDexLibs = project.properties['preDexEnable'] == 'true'
-//    } else {
-//        project.ext.preDexLibs = true // pre dexing should be true by default
-//    }
-//
-//    println('PREDEX ' + (project.ext.preDexLibs ? 'ENABLED' : 'DISABLED'))
-//    // goes to build log or console output
-//
-//    buildNumber = project.hasProperty("buildNumber") ? project.property("buildNumber") : System.getenv("BUILD_NUMBER")
-//    if (buildNumber != null) {
-//        buildNumber = Integer.parseInt(buildNumber)
-//    } else {
-//        buildNumber = 984
-//    }
-//    branchName = project.hasProperty("branchName") ? project.property("branchName") : System.getenv("CIRCLE_BRANCH")
-//
-//    proguardForDebug = project.hasProperty("proguardForDebug") ? project.property("proguardForDebug") : System.getenv("proguardForDebug")
-//    if (proguardForDebug == null) {
-//        proguardForDebug = false
-//    }
-//    if (!project.hasProperty("uploadMappingFile")) {
-//        uploadMappingFile = true
-//    }
-//    commitHash = getGitRevision()
-//    println("proguardForDebug=**********************"+proguardForDebug+" commit="+commitHash)
-
 }
 rootProject.name = "LancetMusic"
-
-static def getGitRevision() {
-    return "git rev-parse --short HEAD".execute().text.trim()
-}
 
 include ':app'

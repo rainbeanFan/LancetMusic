@@ -1,7 +1,55 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    ext {
+        applicationName = "Lancet_Music_Pro"
+
+        retrofitVersion = '2.3.0'
+
+        okHttpVersion = "3.8.1"
+        stethoVersion = "1.5.0"
+        cardan_version = "1.0.46"
+        work_version = "2.4.0"
+
+        billing_version = "4.0.0"
+
+        versionName = '1.0.2'
+        versionCode = 11022950
+
+        if (project.hasProperty('preDexEnable')) {
+            project.ext.preDexLibs = project.properties['preDexEnable'] == 'true'
+        } else {
+            project.ext.preDexLibs = true // pre dexing should be true by default
+        }
+
+        println('PREDEX ' + (project.ext.preDexLibs ? 'ENABLED' : 'DISABLED'))
+        // goes to build log or console output
+
+        buildNumber = project.hasProperty("buildNumber") ? project.property("buildNumber") : System.getenv("BUILD_NUMBER")
+        if (buildNumber != null) {
+            buildNumber = Integer.parseInt(buildNumber)
+        } else {
+            buildNumber = 984
+        }
+        branchName = project.hasProperty("branchName") ? project.property("branchName") : System.getenv("CIRCLE_BRANCH")
+
+        proguardForDebug = project.hasProperty("proguardForDebug") ? project.property("proguardForDebug") : System.getenv("proguardForDebug")
+        if (proguardForDebug == null) {
+            proguardForDebug = false
+        }
+        if (!project.hasProperty("uploadMappingFile")) {
+            uploadMappingFile = true
+        }
+        commitHash = "git rev-parse --short HEAD".execute().text.trim()
+        println("proguardForDebug=**********************"+proguardForDebug+" commit="+commitHash)
+    }
+
+
+}
+
 plugins {
     id 'com.android.application' version '7.1.2' apply false
     id 'com.android.library' version '7.1.2' apply false
     id 'org.jetbrains.kotlin.android' version '1.6.20' apply false
     id("io.realm.kotlin") version "0.11.0"
 }
+

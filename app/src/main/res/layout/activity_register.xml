@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <include layout="@layout/nav_bar"/>
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginVertical="50dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/ic_baseline_music_note_24"/>
+
+    <cn.lancetmusic.ui.widget.InputView
+        android:id="@+id/input_phone"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/inputViewHeight"
+        app:input_icon="@drawable/ic_baseline_local_phone_24"
+        app:input_hint="请输入手机号"
+        app:is_password="false"/>
+
+    <View
+        style="@style/divider_line"/>
+
+    <cn.lancetmusic.ui.widget.InputView
+        android:id="@+id/input_password"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/inputViewHeight"
+        app:input_icon="@drawable/ic_baseline_security_24"
+        app:input_hint="请输入密码"
+        app:is_password="true"/>
+
+    <View
+        style="@style/divider_line"/>
+
+    <cn.lancetmusic.ui.widget.InputView
+        android:id="@+id/input_password_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/inputViewHeight"
+        app:input_icon="@drawable/ic_baseline_security_24"
+        app:input_hint="请确认密码"
+        app:is_password="true"/>
+
+    <View
+        style="@style/divider_line"/>
+
+    <Button
+        android:id="@+id/btn_register"
+        style="@style/commit_button"
+        android:layout_height="48dp"
+        android:layout_marginVertical="@dimen/marginSize"
+        android:text="注  册" />
+
+</LinearLayout>

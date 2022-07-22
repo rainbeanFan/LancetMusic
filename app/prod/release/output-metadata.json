@@ -1,0 +1,20 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "cn.lancet.lancetmusic",
+  "variantName": "prodRelease",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "attributes": [],
+      "versionCode": 561,
+      "versionName": "1.0.0",
+      "outputFile": "LancetMusic_1.0.0_561_R_null.apk"
+    }
+  ],
+  "elementType": "File"
+}

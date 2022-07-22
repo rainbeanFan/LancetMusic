@@ -1,0 +1,133 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+
+    signingConfigs {
+        release {
+            keyAlias 'lancet'
+            keyPassword '135246'
+            storeFile file('./sign.keystore')
+            storePassword '135246'
+        }
+        debug {
+            keyAlias 'lancet'
+            keyPassword '135246'
+            storeFile file('./sign.keystore')
+            storePassword '135246'
+        }
+    }
+
+    namespace 'cn.lancetmusic'
+    compileSdk 32
+
+    defaultConfig {
+        applicationId "cn.lancetmusic"
+        minSdk 23
+        targetSdk 32
+        versionCode 561
+        versionName "1.0.0"
+//        buildConfigField "String", "COMMIT_HASH", "\"${commitHash}\""
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        applicationVariants.all { variant ->
+
+            def apkName = "LancetMusic";
+
+            def branchName = project.hasProperty("branchName") ? project.property("branchName") : System.getenv("CIRCLE_BRANCH")
+
+            def flavour = variant.productFlavors.get(0);
+            if (flavour.name == "dev") {
+                apkName += "_Dev";
+            } else if (flavour.name == "parseTest") {
+                apkName += "_Test";
+            }
+
+            if (variant.buildType.name == "release" && flavour.name == "prod") {
+                variant.mergedFlavor.proguardFiles.add(new File("proguard-rules-prod-release.pro"))
+            }
+
+//            apkName += "_" + versionName + "_" + versionCode + "_" + commitHash + "_" + buildNumber + variant.buildType.name.charAt(0).toUpperCase()
+            apkName += "_" + versionName + "_" + versionCode + "_" + variant.buildType.name.charAt(0).toUpperCase()
+
+//            if (parent.ext.branchName) {
+                apkName += "_" + branchName
+//            }
+
+            apkName += ".apk"
+
+            variant.outputs.all {
+                outputFileName = apkName
+            }
+
+            flavour.ext.betaDistributionGroupAliases = "tpp-android-alpha"
+            flavour.ext.betaDistributionNotifications = true
+//            flavour.ext.betaDistributionReleaseNotes = "Branch: ${parent.ext.branchName}"
+        }
+
+
+    }
+
+    flavorDimensions "mode"
+
+    productFlavors {
+        prod {
+            dimension "mode"
+            applicationId "cn.lancet.lancetmusic"
+            resValue "string","app_name","LancetMusicPro"
+            buildConfigField "int","TYPE","1"
+            manifestPlaceholders = [app_icon:"@drawable/ic_logo_pro"]
+        }
+        dev {
+            dimension "mode"
+            applicationId "cn.lancet.lancetmusic.dev"
+            resValue "string","app_name","LancetMusicDev"
+            buildConfigField "int","TYPE","2"
+            manifestPlaceholders = [app_icon:"@drawable/ic_logo_dev"]
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'androidx.recyclerview:recyclerview:1.3.0-alpha02'
+    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.4.2'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    implementation 'com.blankj:utilcodex:1.31.0'
+
+    implementation 'com.github.bumptech.glide:glide:4.13.1'
+    implementation 'jp.wasabeef:glide-transformations:4.3.0'
+
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    implementation 'io.realm.kotlin:library-base:0.11.0'
+
+}

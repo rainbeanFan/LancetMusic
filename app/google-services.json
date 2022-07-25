@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "405826525967",
+    "project_id": "lancetmusic-97b2a",
+    "storage_bucket": "lancetmusic-97b2a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:405826525967:android:274314579b9767af5ebc7a",
+        "android_client_info": {
+          "package_name": "cn.lancet.lancetmusic.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "405826525967-76rucg8m25r2hhuesa3u7153bjj929pc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0Mpv6ogFQYspoWNYT5z4NLCgf8iZC5ag"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "405826525967-76rucg8m25r2hhuesa3u7153bjj929pc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

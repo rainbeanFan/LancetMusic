@@ -1,23 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="cn.lancetmusic">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".LancetApp"
+        android:name=".DevLancetApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="${app_icon}"
-        android:label="LancetMusic"
+        android:icon="@drawable/ic_launcher_blue_shadow"
+        android:label="LancetMusicDev"
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="${app_round}"
         android:supportsRtl="true"
         android:theme="@style/Theme.LancetMusic"
-        tools:targetApi="31"
-        tools:replace="android:icon,android:icon">
+        tools:targetApi="31">
         <activity
             android:name=".ui.activity.PlayMusicActivity"
             android:exported="false" />
